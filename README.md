@@ -62,12 +62,26 @@ This project demonstrates UI design, state management, and user interaction hand
 ---
 
 ## 📁 Project Structure
+
+```bash
 src/
 ├── components/
+│ ├── SummaryCard.jsx
+│ ├── TransactionTable.jsx
+│ ├── AddTransaction.jsx
+│ ├── Charts.jsx
+│ ├── RoleSwitcher.jsx
+│ └── Insights.jsx
 ├── data/
+│ └── mockData.js
 ├── App.jsx
 ├── main.jsx
 └── index.css
+```
+---
+
+## 🔗 Live Demo
+https://finance-dashboard-lovat-omega.vercel.app/
 
 ---
 
