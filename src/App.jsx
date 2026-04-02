@@ -17,6 +17,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [sortOrder, setSortOrder] = useState("none");
+  const [dark, setDark] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [editData, setEditData] = useState(null);
@@ -65,10 +66,18 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-4">
+    <div className={`min-h-screen px-6 py-4 transition-colors duration-300 ${dark ? "dark bg-gray-900" : "bg-gray-50"}`}>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-semibold text-gray-800">Finance Dashboard</h1>
-        <RoleSwitcher role={role} setRole={setRole} />
+        <h1 className="text-xl font-semibold text-gray-800 dark:text-white">Finance Dashboard</h1>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setDark(!dark)}
+            className="px-3 py-1 rounded-lg border text-sm bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600 hover:shadow-md active:scale-95 transition-all duration-150"
+          >
+            {dark ? "☀️ Light" : "🌙 Dark"}
+          </button>
+          <RoleSwitcher role={role} setRole={setRole} />
+        </div>
       </div>
 
       <div className="grid md:grid-cols-3 gap-5 mb-6">
@@ -77,7 +86,7 @@ function App() {
         <SummaryCard title="Expense" value={expense} />
       </div>
 
-      <div className="bg-white p-4 rounded-2xl shadow-sm border mb-6 flex justify-center">
+      <div className="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border dark:border-gray-700 mb-6 flex justify-center">
         <Charts transactions={transactions} />
       </div>
 
@@ -89,15 +98,15 @@ function App() {
         />
       )}
 
-      <div className="bg-white p-4 rounded-2xl shadow-sm border mb-4 flex flex-wrap gap-3 items-center">
+      <div className="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border dark:border-gray-700 mb-4 flex flex-wrap gap-3 items-center">
         <input
           placeholder="Search category..."
-          className="border px-3 py-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
+          className="border dark:border-gray-600 px-3 py-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white"
           onChange={(e) => setSearch(e.target.value)}
         />
 
         <select
-          className="border px-3 py-2 rounded-lg"
+          className="border dark:border-gray-600 px-3 py-2 rounded-lg dark:bg-gray-700 dark:text-white"
           onChange={(e) => setTypeFilter(e.target.value)}
         >
           <option value="all">All</option>
@@ -106,7 +115,7 @@ function App() {
         </select>
 
         <select
-          className="border px-3 py-2 rounded-lg"
+          className="border dark:border-gray-600 px-3 py-2 rounded-lg dark:bg-gray-700 dark:text-white"
           onChange={(e) => setSortOrder(e.target.value)}
         >
           <option value="none">Sort</option>
@@ -114,17 +123,17 @@ function App() {
           <option value="high">High → Low</option>
         </select>
 
-        <label>From:</label>
-        <input type="date" className="border px-2 py-2 rounded-lg"
+        <label className="dark:text-gray-300">From:</label>
+        <input type="date" className="border dark:border-gray-600 px-2 py-2 rounded-lg dark:bg-gray-700 dark:text-white"
           onChange={(e) => setStartDate(e.target.value)} />
 
-        <label>To:</label>
-        <input type="date" className="border px-2 py-2 rounded-lg"
+        <label className="dark:text-gray-300">To:</label>
+        <input type="date" className="border dark:border-gray-600 px-2 py-2 rounded-lg dark:bg-gray-700 dark:text-white"
           onChange={(e) => setEndDate(e.target.value)} />
 
         <button
           onClick={exportData}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+          className="bg-blue-500 hover:bg-blue-600 active:scale-95 text-white px-4 py-2 rounded-lg transition-all duration-150"
         >
           Export
         </button>
