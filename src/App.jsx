@@ -48,9 +48,10 @@ function App() {
     .filter(t => t.category.toLowerCase().includes(search.toLowerCase()))
     .filter(t => typeFilter === "all" || t.type === typeFilter)
     .filter(t => {
-      if (!startDate || !endDate) return true;
-      return t.date >= startDate && t.date <= endDate;
-    });
+  if (startDate && t.date < startDate) return false;
+  if (endDate && t.date > endDate) return false;
+  return true;
+});
 
   if (sortOrder === "low") filtered.sort((a, b) => a.amount - b.amount);
   if (sortOrder === "high") filtered.sort((a, b) => b.amount - a.amount);
@@ -113,9 +114,11 @@ function App() {
           <option value="high">High → Low</option>
         </select>
 
+        <label>From:</label>
         <input type="date" className="border px-2 py-2 rounded-lg"
           onChange={(e) => setStartDate(e.target.value)} />
 
+        <label>To:</label>
         <input type="date" className="border px-2 py-2 rounded-lg"
           onChange={(e) => setEndDate(e.target.value)} />
 
